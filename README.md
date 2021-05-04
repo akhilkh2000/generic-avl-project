@@ -16,8 +16,8 @@ The public methods / interfacces provided are :
    * Description: Prints tree using inorder traversal and displays it in a legible format.
 
 * erase: 
-    Signature : ```void erase(T data);```
-    Description: Deletes the node passed to it and ensures AVL tree properties are maintained.
+    * Signature : ```void erase(T data);```
+    * Description: Deletes the node passed to it and ensures AVL tree properties are maintained.
 
 * find: 
     * Signature:  ```Iterator find(T data);```
