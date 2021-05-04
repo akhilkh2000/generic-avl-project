@@ -5,13 +5,10 @@ int main()
 {
     AVL<int> t = AVL<int>();
     t.insert(5);
-    auto it = t.begin();
-    auto it1(it);
-    auto it2 = it1;
+    t.insert(6);
+    AVL<int> bt(t);
 
-    cout << *it1 << endl;
-
-    cout << *it2 << endl;
+    bt.print_tree();
 
     return 0;
 }

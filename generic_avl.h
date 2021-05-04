@@ -105,6 +105,56 @@ public:
     // Constructor
     AVL<T>() : root(nullptr) {}
 
+    //Copy constructor
+    AVL<T>(const AVL<T> &rhs)
+    {
+        cout << "copy ctor called!\n";
+        if (rhs.root == nullptr)
+            this->root = nullptr;
+        else
+        {
+            this->root = copy_helper(rhs.root);
+        }
+    }
+    //Copy assignment
+    AVL<T> &operator=(const AVL<T> &rhs)
+    {
+        cout << "Copy assignment called!\n";
+        this->root = copy_helper(rhs.root);
+        return *this;
+    }
+    /*
+    Method-1: 
+
+        lhs creates a new clone
+        delete all the nodes in rhs
+        return lhs
+
+    Method-2: 
+        lhs root points to the rhs root
+        make the rhs root point to null
+        return lhs
+
+    Method-1 takes more time time than Method-2
+    as method 1 copies a new tree and deleted the old tree
+    */
+
+    //Move constructor
+    AVL<T>(AVL<T> &&rhs)
+    {
+        cout << "Move constructor is called\n";
+        this->root = rhs.root;
+        rhs.root = nullptr;
+    }
+
+    //Move Assingment
+    AVL<T> &operator=(AVL<T> &&rhs)
+    {
+        cout << "Move Assignment is called\n";
+        this->root = rhs.root;
+        rhs.root = nullptr;
+        return *this;
+    }
     // Insert
     void insert(T data);
     // Display
@@ -132,7 +182,22 @@ public:
 private:
     // Private variables
     Node<T> *root;
-    vector<pair<Node<T> *, int>> stk;
+    // vector<pair<Node<T> *, int>> stk;
+    //copy util
+    Node<T> *copy_helper(Node<T> *rhs) const
+    {
+        if (rhs == nullptr)
+        {
+            return nullptr;
+        }
+        else
+        {
+            Node<T> *temp = new Node<T>(rhs->data);
+            temp->left = copy_helper(rhs->left);
+            temp->right = copy_helper(rhs->right);
+            return temp;
+        }
+    }
     // Rotations Utilities
     void update_height_and_balance_factor(Node<T> *n);
     Node<T> *left_rotation(Node<T> *n);
