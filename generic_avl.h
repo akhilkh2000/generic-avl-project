@@ -8,14 +8,13 @@ struct Node
     T data;
     int height, balance_factor;
     Node<T> *left, *right;
-    Node(T x)
+    Node(T x = T())
     {
         data = x;
         height = 1;
         balance_factor = 0;
         left = right = nullptr;
     }
-
     T operator*()
     {
         return this->data;
@@ -101,7 +100,8 @@ public:
         {
             return this->ptr != other.ptr;
         }
-    };
+    }; // end of iterator class
+
     // Constructor
     AVL<T>() : root(nullptr) {}
 
@@ -120,7 +120,12 @@ public:
     AVL<T> &operator=(const AVL<T> &rhs)
     {
         cout << "Copy assignment called!\n";
-        this->root = copy_helper(rhs.root);
+        if (this != &rhs)
+        {
+            delete_tree(this->root);
+            this->root = copy_helper(rhs.root);
+        }
+
         return *this;
     }
     /*
@@ -151,8 +156,13 @@ public:
     AVL<T> &operator=(AVL<T> &&rhs)
     {
         cout << "Move Assignment is called\n";
-        this->root = rhs.root;
-        rhs.root = nullptr;
+        if (this != &rhs)
+        {
+            delete_tree(this->root);
+            this->root = rhs.root;
+            rhs.root = nullptr;
+        }
+
         return *this;
     }
     // Insert
@@ -177,6 +187,14 @@ public:
     inline Iterator end()
     {
         return Iterator(nullptr);
+    }
+
+    // Destructor
+    ~AVL<T>()
+    {
+        // cout << "Destructor is called\n";
+
+        // cout << "Tree delelted\n";
     }
 
 private:
@@ -215,6 +233,17 @@ private:
 
     // Search Utilities
     Iterator search_in_avl(Node<T> *n, T data);
+    //delete tree
+    void delete_tree(Node<T> *root)
+    {
+        if (root != nullptr)
+        {
+            // cout << "deleting " << root->data << endl;
+            delete_tree(root->left);
+            delete_tree(root->right);
+            delete root;
+        }
+    }
 };
 template <typename T>
 Node<T> *AVL<T>::Iterator::next()

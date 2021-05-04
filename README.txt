@@ -1,47 +1,74 @@
-Following functionalities are provided with AVL tree
+Following are the classes and the interfaces provided :
 
-1. Creating a tree: 
-    AVL<Typename> Var_name;
-    Will initialize the tree whose data is of type Typename
+-> Class AVL 
 
-2. print_tree():
-    Will display the tree and the balance factor besides it.
+1. Constructor:
+    Signature : AVL<T>();
+    Description: Initialize the AVL tree's root to nullptr .
+2. Copy Constructor:
+    Signature : AVL<T>(const AVL<T> &rhs);
+    Description: Used to copy object passed(rhs) into object pointed to by "this".(callee)
+3.Copy Assignment:
+    Signature : AVL<T>(const AVL<T> &rhs)
+    Description: Overloads assignment operator for objects of AVL class.
+4. Move Constructor:
+    Signature : AVL<T>(AVL<T> &&rhs)
+    Description: Moves the data in the heap instead of making a deep copy
+ 5.Move Assignment operator:
+    Signature : AVL<T> &operator=(AVL<T> &&rhs)
+    Description: Defines the move assignment operator that moves the data in the heap instead of making a deep copy.
+6.  Insert :
+    Signature :void insert(T data);
+    Description: Inserts data appropriately into the AVL tree.
+7. print_tree:
+    Signature : void print_tree();
+    Description: Prints tree using inorder traversal and displays it in a legible format.
+8. erase: 
+    Signature : void erase(T data);
+    Description: Deletes the node passed to it and ensures AVL tree properties are maintained.
 
-3. erase(val): 
-    If that val is present in the tree then that val is deleted and After deletion if required rotations are performed to make it again balanced
+9. find: 
+    Signature:  Iterator find(T data);
+    Description: If the element passed is found in the AVL tree, it returns the iterator pointing to the node . If not, an iterator pointing to nullptr is returned .
 
-    If val is not present then no changes are made
+10. empty:  
+    Signature:  inline bool empty();
+    Description: Checks if AVL tree pointed to by "this" is empty or not.
+5. begin:
+    Signature: inline Iterator begin();
+    Description: returns iterator to the first node (in inorder traversal) of the AVL tree.
 
-4. find(val): 
-    If val is present the it will return an iterator pointing to that val else it will return iterator to the end
+6. end:
+    Signature: inline Iterator end();
+    Description: Return an iterator which is next to the last node in the inorder traersal of the tree(which is nullptr)
 
-5. begin(): 
-    Return an iterator to the first node in the inrder traversal of the tree
 
-6. end(): 
-    Return an iterator which is next to the last node in the inorder traersal of the tree(which is nullptr)
+-> Subclass Iterator 
+Implements a Forward iterator which traverses the tree in inorder fashion.
 
-Iterators and functionalities associated with the  it: 
-
-Forward iterators are provided which will traverse the current tree in the inoder.
-
-Let it be the iterator then
+Public methods:
+1. Constructor 
+    Signature: Iterator(Node<T> *n)
+    Description: Initialize the iterator with the node passed to it and accordingly populate inner stack.
  
- ++it: 
-    Moves the Iterator to its adjacent inorder node and returns the new value of the iterator
- it++:
-    Returns the value of the current iterator and then moves the Iterator to its next inorder node.
+ 2. ++(prefix) operator:
+    Signature: Iterator &operator++();
+   Description: Moves the Iterator to its adjacent inorder node and returns the new value of the iterator
+ 3. ++ (postfix):
+    Signature:Iterator operator++(int)
+    Description: Returns the value of the current iterator and then moves the Iterator to its next inorder node.
 
- *it: 
-    Return the data of the node to which the iterator is pointing to
+ 4.*(dereference): 
+    Signature:T operator*()
+    Description: returns the data of the node to which the iterator is pointing to
 
- it->: 
-    return the pointer to the node the iterator is pointing to
+ 5.->(arrow operator): 
+    Signature: Node<T> *operator->()
+    Description : return the pointer to the node the iterator is pointing to
+6. == operator
+    Signature:  bool operator==(const Iterator &other) const;
+    Description: Checks for equality of two iterators based on the internal pointer to which they point.
 
-Let it1 and it2 be 2 iterators
- it1 == it2: 
-    Return True if both the iterator are pointing to the same node in the tree else Returns false
-
- it1 != it2: 
-    Returns true of both the iterators are not pointing to the same node of hte tree else returns false
-
+ 7. != operator: 
+    Signature:   bool operator!=(Iterator other)const;
+    Description: Checks for inequality of two iterators based on the internal pointer to which they point.
