@@ -8,31 +8,31 @@ Generic AVL tree data structure implemented in C++;
 This generic AVL tree is made using templates. This class also provides a forward iterator to traverse the AVL tree in inorder fashion .
 The public methods / interfacces provided are :
 *  Insert :
-    Signature :```void insert(T data);```
-    Description: Inserts data appropriately into the AVL tree.
+    * Signature :```void insert(T data);```
+    * Description: Inserts data appropriately into the AVL tree.
 
 * print_tree:
-    Signature :``` void print_tree();```
-    Description: Prints tree using inorder traversal and displays it in a legible format.
+   * Signature :``` void print_tree();```
+   * Description: Prints tree using inorder traversal and displays it in a legible format.
 
 * erase: 
     Signature : ```void erase(T data);```
     Description: Deletes the node passed to it and ensures AVL tree properties are maintained.
 
 * find: 
-    Signature:  ```Iterator find(T data);```
-    Description: If the element passed is found in the AVL tree, it returns the iterator pointing to the node . If not, an iterator pointing to nullptr is returned .
+    * Signature:  ```Iterator find(T data);```
+    * Description: If the element passed is found in the AVL tree, it returns the iterator pointing to the node . If not, an iterator pointing to nullptr is returned .
 
 * empty:
-    Signature:  ```inline bool empty();```
-    Description: Checks if AVL tree pointed to by "this" is empty or not.
+   * Signature:  ```inline bool empty();``` 
+   * Description: Checks if AVL tree pointed to by "this" is empty or not.
 * begin:
-    Signature: ```inline Iterator begin();```
-    Description: returns iterator to the first node (in inorder traversal) of the AVL tree.
+    * Signature: ```inline Iterator begin();``` 
+    * Description: returns iterator to the first node (in inorder traversal) of the AVL tree.
 
 * end:
-    Signature: ```inline Iterator end();```
-    Description: Return an iterator which is next to the last node in the inorder traersal of the tree(which is nullptr)
+    * Signature: ```inline Iterator end();```
+   *  Description: Return an iterator which is next to the last node in the inorder traersal of the tree(which is nullptr)
 
 
 ## Getting Started
